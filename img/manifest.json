@@ -42,6 +42,6 @@
    "start_url": "https://rokon015.github.io/bot",
    "background_color": "#0000ff",
    "display": "standalone",
-   "scope": "../",
+   "scope": "/",
    "theme_color": "#0000ff"
 }
