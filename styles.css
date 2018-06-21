@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
+
+body {
+  background: lightgray;
+  margin: 0 auto;
+  padding-top: 65px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.header {
+  background: white;
+  box-shadow: 0 0 3px black;
+  width: 100%;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.form {
+  display: flex;
+  flex: 1;
+  max-width: 600px;
+}
+
+input[type=text] {
+  background: white;
+  width: 70%;
+  font-size: 22px;
+  padding: 5px 50px 5px 10px;
+  outline: none;
+  border: 2px solid blue;
+  border-radius: 10px;
+  flex: 1;
+}
+
+button {
+  background: blue;
+  color: white;
+  width: 50px;
+  height: inherit;
+  border: none;
+  border-radius: 0px 10px 10px 0px;
+  font-size: 30px;
+  margin-left: -50px;
+}
+
+button:hover {
+  background: #009;
+}
+
+button:active {
+  transform: translateY(5px);
+  transition: .1s;
+}
+
+.copyright {
+  display: none;
+}
+
+@media (min-width:1200px) {
+  .copyright {
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-weight: bold;
+  }
+}
+
+#messages {
+  text-align: left;
+  cursor: default;
+}
+
+h1 {
+  border-radius: 20px;
+  margin: 15px;
+  padding: 5px 8px;
+  font-size: 19px;
+  box-shadow: 0px 0px 2px black;
+}
+
+#botSpeak {
+  background: blue;
+  float: right;
+  clear: both;
+  color: white;
+  animation-duration: .2s;
+  animation-name: slidedown;
+}
+
+@keyframes slidedown {
+  from {
+    margin-top: -10px;
+    width: inherit;
+  }
+  to {
+    margin-top: 0;
+    width: inherit;
+  }
+}
+
+#userInput {
+  float: left;
+  color: black;
+  background: white;
+}

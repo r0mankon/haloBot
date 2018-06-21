@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Mini Bot</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0000ff">
+</head>
+
+<body>
+  <header class="header">
+    <form id='my_form' class='form'>
+      <input type='text' id='input' onblur='this.focus()' autofocus>
+      <button id='btn' type='button' value='submit'>
+        <span>&larrhk;</span>
+      </button>
+    </form>
+
+    <span class="copyright">2017 &copy; rokon015</span>
+  </header>
+
+  <section id='messages'>
+    <h1 id="botSpeak">Ask me somthing...</h1>
+  </section>
+
+  <script src='app.js'></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+
+    // link to a image file
+    var iconUrl = 'https://www.seeklogo.net/wp-content/uploads/2014/10/Google-Chrome-logo-vector-download.png';
+
+    // create the <img> html element
+    // on first load it will request the image
+    // second time it will load it from cache directly thanks to the service worker
+    var imgElement = document.createElement('img');
+    imgElement.src = iconUrl;
+  </script>
+</body>
+
+</html>
