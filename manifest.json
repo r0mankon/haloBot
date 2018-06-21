@@ -3,7 +3,7 @@
    "short_name": "Bot",
    "name": "JS Bot",
    "icons": [{
-         "src": "img/bot-200.png",
+         "src": "img/bot-192.png",
          "type": "image/png",
          "sizes": "192x192"
       },
