@@ -3,10 +3,10 @@ var RUNTIME = 'runtime';
 
 // list the files you want cached by the service worker
 PRECACHE_URLS = [
-   'index.html',
+   '/index.html',
    './',
-   'style.css',
-   'app.js'
+   '/style.css',
+   '/app.js'
 ];
 
 
