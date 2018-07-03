@@ -3,7 +3,7 @@
 
 <head>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <title>Mini Bot</title>
+  <title>microBot</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
@@ -19,37 +19,50 @@
   <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   <link rel="manifest" href="img/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#3232ff">
   <meta name="msapplication-TileImage" content="img/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#3232ff">
 </head>
 
 <body>
   <header class="header">
+    <div class="container">
+      <img class="icon" src="img/icon-512.png" alt="bot icon">
+      <h1 class="title">MicroBot</h1>
+      <div class="info">
+        <b>i</b>
+      </div>
+    </div>
+  </header>
+
+  <div class="info-modal">
+    <span class="close">&times;</span>
+    Made with &hearts; by <a href="https://rokon015.github.io">rokon</a>
+  </div>
+
+  <main id='messages'>
+    <p id="botSpeak">Ask me somthing...</p>
+  </main>
+
+  <footer>
     <form id='my_form' class='form'>
-      <input type='text' id='input' onblur='this.focus()' autofocus>
+      <input type='text' id='input' placeholder="Type here & hit enter" autofocus>
       <button id='btn' type='button' value='submit'>
         <span>&larrhk;</span>
       </button>
     </form>
-
-    <span class="copyright">2017 &copy; rokon015</span>
-  </header>
-
-  <section id='messages'>
-    <h1 id="botSpeak">Ask me somthing...</h1>
-  </section>
+  </footer>
 
   <script src='app.js'></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('sw.js').then(function (registration) {
-          console.log('service worker is registered');
-        }, function (err) {
-          console.log('service worker reg failed');
-        });
-      })
+    if (navigator.serviceWorker.controller) {
+      console.log('[PWA Builder] active service worker found, no need to register')
+    } else {
+      navigator.serviceWorker.register('pwabuilder-sw.js', {
+        scope: './'
+      }).then(function (reg) {
+        console.log('Service worker has been registered for scope: ' + reg.scope);
+      });
     }
   </script>
 </body>

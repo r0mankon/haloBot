@@ -1,7 +1,7 @@
 {
    "author": "rokon015",
    "short_name": "Bot",
-   "name": "JS Bot",
+   "name": "microBot",
    "icons": [{
          "src": "./android-icon-36x36.png",
          "sizes": "36x36",
@@ -40,8 +40,8 @@
       }
    ],
    "start_url": "https://rokon015.github.io/bot",
-   "background_color": "#0000ff",
+   "background_color": "#3232ff",
    "display": "standalone",
    "scope": "/",
-   "theme_color": "#0000ff"
+   "theme_color": "#3232ff"
 }
