@@ -73,7 +73,7 @@ function bot() {
    reply(joke, 'Did you hear about the two thieves who stole a calender? They each got 6 months');
    reply(favMemory, 'One of my favorites, The first time we met!');
    reply(developer, 'Rokon');
-   reply(rokon, 'Visit here to know about rokon - ' + url);
+   reply(rokon, 'Visit here to know about rokon - https://rokon015.github.io');
    reply(thanks, 'You are Welcome');
    reply(bye, 'Good bye');
 
