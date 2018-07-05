@@ -34,8 +34,6 @@ var rokon = ['rokon', 'who is rokon'];
 var thanks = ['thanks', 'thank', 'thank you'];
 var bye = ['bye', 'good bye'];
 
-var url = 'https://rokon015.github.io';
-
 var button = document.getElementById('btn');
 var res; // bot response
 var i;
