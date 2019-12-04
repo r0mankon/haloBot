@@ -1,77 +1,89 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-US">
 <head>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <title>microBot</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="img/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-  <link rel="manifest" href="img/manifest.json">
-  <meta name="msapplication-TileColor" content="#3232ff">
-  <meta name="msapplication-TileImage" content="img/ms-icon-144x144.png">
-  <meta name="theme-color" content="#3232ff">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>haloBot</title>
+   <link rel="stylesheet" href="./style/styles.css" />
+   <link rel="manifest" href="/manifest.json">
+   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="192x192" href="/img/android-chrome-192x192.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+   <link rel="shortcut icon" href="/img/favicon.ico">
+   <meta name="msapplication-TileColor" content="#1b1b1b">
+   <meta name="msapplication-config" content="/img/browserconfig.xml">
+   <meta name="theme-color" content="#1b1b1b">
+   <meta name="description"
+      content="A Simple Internet Bot written in Javascript. UI Inspired By Microsoft Cortana. API Uses From WikiMedia, DuckDuckGo, OpenWeather, ChuckNorrisJokes etc">
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-      <img class="icon" src="img/icon-512.png" alt="bot icon">
-      <h1 class="title">MicroBot</h1>
-      <div class="info">
-        <b>i</b>
-      </div>
-    </div>
-  </header>
+   <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  <div class="info-modal">
-    <span class="close">&times;</span>
-    <span class="name">MicroBot</span>
-    <span class="version">Version: 1.00</span>
-    <span class="repo"> Repo:
-      <a href="https://github.com/rokon015/bot">github.com/rokon015/bot</a>
-    </span>
-    <span class="made">Made with &hearts; by
-      <a href="https://rokon015.github.io">Rokon</a>
-    </span>
-  </div>
+   <main class="grid-container">
 
-  <main id='messages'>
-    <p id="botSpeak">Ask me somthing...</p>
-  </main>
+      <section class="container">
+         <span class="icon about-btn"></span>
 
-  <footer>
-    <form id='my_form' class='form'>
-      <input type='text' id='input' placeholder="Type here & hit enter" autofocus>
-      <button id='btn' type='button' value='submit'>
-        <span>&larrhk;</span>
-      </button>
-    </form>
-  </footer>
+         <div class="halo">
+            <span class="halo-outer">
+               <span class="halo-inner">
+                  <span class="halo-middle"></span>
+               </span>
+            </span>
+         </div>
+      </section>
 
-  <script src='app.js'></script>
-  <script>
-    if (navigator.serviceWorker.controller) {
-      console.log('[PWA Builder] active service worker found, no need to register')
-    } else {
-      navigator.serviceWorker.register('pwabuilder-sw.js', {
-        scope: './'
-      }).then(function (reg) {
-        console.log('Service worker has been registered for scope: ' + reg.scope);
-      });
-    }
-  </script>
+      <section class="container container-output">
+         <p id="output-element">Welcome Back, What can I do for you ?</p>
+         <d class="ad" style="display: none;">
+            <a href="https://wap4dollar.com/ad/serve.php?id=jx8hh8og57">Hot Downloads of 2015 !</a>
+         </d>
+      </section>
+
+      <section class="container container-bottom">
+         <div class="container-tiles" id="quick-tiles"></div>
+
+         <div class="container-input">
+            <span class="icon" id="mic"></span>
+            <input type="text" id="input" placeholder="Type here & hit enter" autocomplete="off" />
+            <span class="icon" id="submit"></span>
+         </div>
+      </section>
+   </main>
+
+   <section class="about-dialog">
+      <span class="close-btn">&times;</span>
+      <span class="app-name">haloBot</span>
+      <span class="version">Version: 1.0.4</span>
+      <span class="repo">
+         Repo:
+         <a href="https://github.com/rokonxr/bot" rel="noopener" target="blank">github.com/rokon015/bot</a>
+      </span>
+      <span class="copyright">Made with &hearts; by
+         <a href="https://rokonxr.github.io" target="blank">Rokon</a>
+      </span>
+   </section>
+
+   <script src="./dist/bundle.js"></script>
+   <script>
+      if (navigator.serviceWorker.controller) {
+         console.log(
+            "[PWA Builder] active service worker found, no need to register"
+         );
+      } else {
+         navigator.serviceWorker
+            .register("service-worker.js", {
+               scope: "/"
+            })
+            .then(function (reg) {
+               console.log(
+                  "Service worker has been registered for scope: " +
+                  reg.scope
+               );
+            });
+      }
+   </script>
 </body>
 
 </html>
