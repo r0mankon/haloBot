@@ -2,12 +2,12 @@ import {
    about_button,
    about_dialog,
    input_field,
-   output,
+   output_element,
    close_button,
    mic,
    submit
 } from "./elements";
-import fun from "./function";
+import fun from "./Functions";
 
 HTMLElement.prototype.show = function() {
    this.style.visibility = "visible";
@@ -17,141 +17,156 @@ HTMLElement.prototype.hide = function() {
    this.style.visibility = "hidden";
 };
 
-about_button.onclick = () => about_dialog.show();
-
-close_button.onclick = () => about_dialog.hide();
-
-// Enter key action
-input_field.addEventListener("keypress", function(event) {
-   if (event.keyCode === 13) {
-      event.preventDefault();
-      submit.click();
-      input_field.value = "";
-   }
-});
-
-// Clear text field on focus
-input_field.onfocus = () => (input_field.value = "");
-
-export function write_output(data) {
-   output.textContent = data;
+// Unexpectedly exports for Function.js
+export function writeHtml(data) {
+   output_element.innerHTML = data;
 }
 
-function speak(text = output.textContent) {
+function greet() {
+   const greetings = [
+      "Hi, What can I do for you?",
+      "Welcome Back, How are you doing?",
+      "What's up?",
+      "How can I help you, Sir?"
+   ];
+   return greetings[Math.floor(Math.random() * greetings.length)];
+}
+
+function text_to_speech(text = output_element.textContent) {
    if ("speechSynthesis" in window) {
       const msg = new SpeechSynthesisUtterance();
       msg.text = text;
       speechSynthesis.speak(msg);
    } else {
-      console.log("SpeechSynthesis not supported in your browser");
+      alert("SpeechSynthesis not supported in your browser");
    }
 }
 
-function listen() {
-   window.SpeechRecognition =
-      window.webkitSpeechRecognition || window.SpeechRecognition;
+function speech_to_text() {
+   const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
 
    const recognition = new SpeechRecognition();
    recognition.start();
+   recognition.onstart = () => writeHtml("Listening...");
    recognition.onresult = event => {
-      const transcript = event.results[0][0].transcript;
+      let current = event.resultIndex;
+      const transcript = event.results[current][0].transcript;
 
       if (event.results[0].isFinal) {
-         input_field.value = transcript;
-         bot();
+         return transcript;
       }
    };
 }
 
-function duck_duck_go(query) {
-   fetch(
-      `https://api.duckduckgo.com/?no_redirect=1&no_html=1&skip_disambig=1&q=${query}&format=json`
-   )
-      .then(response => response.json())
-      .then(data => {
-         if (data.AbstractText !== "") {
-            write_output(data.AbstractText);
-         } else if (data.AbstractText === "" && data.RelatedTopics !== []) {
-            write_output(
-               `I have several answers for you...
-               ${data.RelatedTopics[3].Topics[1].Text}`
-            );
-         } else {
-            write_output("Sorry I have nothing to say");
-         }
-      })
-      .catch(error => alert(error));
+function justifyText() {
+   // childish hard coded value cause I've no the other solution
+   if (output_element.innerText.length > 100) {
+      output_element.style.textAlign = "justify";
+   } else {
+      output_element.style.textAlign = "center";
+   }
 }
 
 function bot() {
-   let inputValue = input_field.value.toLowerCase();
+   const inputValue = input_field.value.toLowerCase();
+   // using arrow function instead of normal function for whatever reason
+   const includes = key => {
+      return inputValue.includes(key);
+   };
 
-   if (inputValue.includes("hi")) {
-      write_output("Hi, What can I do for you");
-   } else if (inputValue.includes("you")) {
-      write_output("I am doing great. Thanks for asking");
-   } else if (inputValue.includes("bored")) {
-      ("I can tell you a joke or you can play a game");
-   } else if (inputValue.includes("thanks")) {
-      write_output("Your are Welcome");
-   } else if (inputValue.includes("bye")) {
-      write_output("Goode Bye");
-   } else if (inputValue.includes("time")) {
-      write_output(fun.getTime());
-   } else if (inputValue.includes("date")) {
-      write_output(fun.getDate());
-   } else if (inputValue.includes("month")) {
-      write_output(fun.getMonthName());
-   } else if (inputValue.includes("weather")) {
-      fun.get_weather();
-   } else if (inputValue.includes("joke")) {
-      fun.get_jokes();
+   // childish logic started!!!
+
+   if (includes("hi")) {
+      writeHtml("Hi, What can I do for you");
+   } else if (includes("you")) {
+      writeHtml("I am doing great. Thanks for asking");
+   } else if (includes("bored")) {
+      ("What can I do for you?");
+   } else if (includes("thanks")) {
+      writeHtml("Your are Welcome");
+   } else if (includes("bye")) {
+      writeHtml("Goode Bye");
+   } else if (includes("time")) {
+      writeHtml(fun.getTime());
+   } else if (includes("date")) {
+      writeHtml(fun.getDate());
+   } else if (includes("month")) {
+      writeHtml(fun.getMonthName());
+   } else if (includes("weather")) {
+      fun.get_weather(); // Looks unexpected
+   } else if (includes("joke")) {
+      fun.get_jokes().then(res => writeHtml(res));
    } else {
-      duck_duck_go(inputValue);
+      fun.duck_duck_go(inputValue).then(res => writeHtml(res));
    }
 
-   if (output.textContent !== "Welcome") {
-      speak();
-   }
+   text_to_speech();
+   justifyText();
 }
 
-mic.onclick = () => listen();
+function main() {
+   about_button.onclick = () => about_dialog.show();
+   close_button.onclick = () => about_dialog.hide();
 
-submit.onclick = () => {
-   if (input_field.value !== "") {
-      bot();
-   }
-};
-
-// Pre Suggestion
-const press = [
-   "Time",
-   "Date",
-   "Weather",
-   "Tell me a joke",
-   "What is bot",
-   "When did first world war happen",
-   "Ecosia"
-];
-
-const press_container = document.querySelector("#quick-tiles");
-
-press.forEach(array_element => {
-   const tile = document.createElement("span");
-   tile.className = "tile";
-   tile.innerHTML = array_element;
-   press_container.appendChild(tile);
-});
-
-const all_pres = document.querySelectorAll(".tile");
-let tiles_inner_text;
-
-all_pres.forEach(tile => {
-   tile.addEventListener("click", event => {
-      tiles_inner_text = event.target.innerText;
-      input_field.value = tiles_inner_text;
-      submit.click();
+   // Enter key press to submit
+   input_field.addEventListener("keypress", event => {
+      if (event.keyCode === 13) {
+         event.preventDefault();
+         submit.click();
+         // clear tex field
+         input_field.value = "";
+      }
    });
-});
 
-speak();
+   // Clear text field on focus
+   input_field.onfocus = () => (input_field.value = "");
+
+   writeHtml(greet());
+
+   mic.onclick = () => {
+      input_field.value = speech_to_text();
+      bot();
+   };
+
+   submit.onclick = () => {
+      if (input_field.value !== "") {
+         bot();
+      }
+   };
+
+   // Some Command shortcut buttons
+
+   const shortcut_text_array = [
+      "Time",
+      "Date",
+      "Weather",
+      "Tell me a joke",
+      "What is bot",
+      "Ecosia",
+      "Computer Science"
+   ];
+
+   shortcut_text_array.forEach(text => {
+      const shortcut_btn = document.createElement("span");
+      shortcut_btn.className = "shortcut-btn";
+      shortcut_btn.innerHTML = text;
+      document.querySelector(".container-sc-btn").appendChild(shortcut_btn);
+   });
+
+   const all_shortcut_btn = document.querySelectorAll(".shortcut-btn");
+   let btn_inner_text;
+
+   // adding event listener to all buttons
+   all_shortcut_btn.forEach(button => {
+      button.addEventListener("click", event => {
+         btn_inner_text = event.target.innerText;
+         input_field.value = btn_inner_text;
+         submit.click();
+      });
+   });
+
+   text_to_speech();
+}
+
+main();

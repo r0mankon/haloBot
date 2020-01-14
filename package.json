@@ -1,7 +1,7 @@
 {
    "name": "halobot",
    "version": "1.0.4",
-   "description": "Internet Bot Project",
+   "description": "Internet Bot",
    "main": "index.js",
    "scripts": {
       "dev": "webpack --mode development",
@@ -13,19 +13,23 @@
       "url": "git+https://github.com/rokonxr/bot.git"
    },
    "keywords": [],
-   "author": "",
-   "license": "ISC",
+   "author": "@rokonxr",
+   "license": "MIT",
    "bugs": {
       "url": "https://github.com/rokonxr/bot/issues"
    },
    "homepage": "https://github.com/rokonxr/bot",
    "devDependencies": {
-      "@babel/core": "^7.6.2",
-      "@babel/preset-env": "^7.6.2",
+      "@babel/core": "^7.8.0",
+      "@babel/plugin-transform-runtime": "^7.8.0",
+      "@babel/preset-env": "^7.8.2",
       "@webpack-cli/init": "^0.2.2",
       "babel-loader": "^8.0.6",
       "html-webpack-plugin": "^3.2.0",
-      "webpack": "^4.41.0",
-      "webpack-cli": "^3.3.9"
+      "webpack": "^4.41.5",
+      "webpack-cli": "^3.3.10"
+   },
+   "dependencies": {
+      "@babel/runtime": "^7.8.0"
    }
 }

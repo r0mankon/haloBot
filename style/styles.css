@@ -2,15 +2,15 @@
    box-sizing: border-box;
 }
 
-a:any-link {
-   color: rgba(255, 255, 255, 0.822);
-}
-
 :root {
-   --color-primary: #1b1b1b;
+   --color-primary: #002e4e;
    --color-secondary: #1213fd;
    --color-accent: #af5adf;
    --halo-center: var(--color-primary);
+}
+
+a:any-link {
+   color: var(--color-accent);
 }
 
 body {
@@ -41,13 +41,12 @@ body {
    -ms-user-select: none;
    user-select: none;
    display: inline-block;
-   transform: scale(0.3);
 }
 
 .halo-outer {
    background: var(--color-accent);
-   height: 200px;
-   width: 200px;
+   height: 56px;
+   width: 56px;
    border-radius: 50%;
    display: flex;
    align-items: center;
@@ -56,8 +55,8 @@ body {
 
 .halo-inner {
    background: var(--color-secondary);
-   height: 160px;
-   width: 160px;
+   height: 43px;
+   width: 43px;
    border-radius: 50%;
    display: flex;
    align-items: center;
@@ -71,8 +70,8 @@ body {
 
 .halo-middle {
    background: var(--halo-center);
-   height: 145px;
-   width: 145px;
+   height: 38px;
+   width: 38px;
    border-radius: 50%;
    animation-name: middle-halo-animation;
    animation-duration: 2s;
@@ -83,12 +82,12 @@ body {
 
 @keyframes inner-halo-animation {
    50% {
-      height: 160px;
-      width: 40px;
+      height: 43px;
+      width: 20px;
    }
    100% {
-      height: 160px;
-      width: 160px;
+      height: 43px;
+      width: 43px;
    }
 }
 
@@ -98,7 +97,13 @@ body {
    }
 }
 
-.container-output {
+.container-top {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.container-middle {
    overflow-y: auto;
    opacity: 0;
    animation-name: delay;
@@ -108,10 +113,8 @@ body {
 }
 
 #output-element {
-   margin: 10px;
+   margin: 15px 5px;
    color: white;
-   /* animation-duration: 0.2s;
-   animation-name: down; */
 }
 
 .container-bottom {
@@ -121,7 +124,7 @@ body {
    justify-content: flex-end;
    opacity: 0;
    animation-name: delay;
-   animation-delay: 1s;
+   animation-delay: 0.5s;
    animation-duration: 0.5s;
    animation-fill-mode: forwards;
 }
@@ -132,27 +135,27 @@ body {
    }
 }
 
-.container-tiles {
-   overflow: auto;
-   white-space: pre-line;
+.container-sc-btn {
+   /* overflow: auto; */
+   background-color: var(--color-primary);
    -webkit-user-select: none;
    -moz-user-select: none;
-   margin-bottom: 1rem;
+   margin-bottom: 5px;
 }
 
-.tile {
+.shortcut-btn {
    display: inline-block;
    font-size: 0.8em;
-   margin: 7px;
-   padding: 5px;
+   margin: 5px;
+   padding: 5px 10px;
    background: var(--color-accent);
    color: black;
-   border-radius: 5px;
-   box-shadow: 0 1px 5px black;
+   border-radius: 15px;
+   box-shadow: 0 1px 3px rgb(20, 20, 20);
    cursor: pointer;
 }
 
-.tile:active {
+.shortcut-btn:active {
    box-shadow: none;
    filter: brightness(2);
    transition: 0.2s;
@@ -176,7 +179,7 @@ body {
    outline: none;
    border: 1px solid var(--color-accent);
    border-radius: 20px;
-   margin: 0 10px;
+   margin: 0 7px;
 }
 
 #input:focus {
@@ -189,6 +192,8 @@ body {
    width: 20px;
    height: 20px;
    background-size: cover;
+   padding: 0;
+   margin: 0;
 }
 
 .icon:active {
@@ -198,10 +203,11 @@ body {
 
 #mic {
    height: inherit;
-   width: 43px;
+   width: 45px;
    border-radius: 100%;
    background-color: transparent;
-   background-image: url("/img/mic.png");
+   background-image: url("/assets/mic.png");
+   background-size: contain;
    background-repeat: no-repeat;
 }
 
@@ -210,7 +216,7 @@ body {
    width: 43px;
    border-radius: 100%;
    background-color: transparent;
-   background-image: url("/img/submit.svg");
+   background-image: url("/assets/submit.svg");
    background-repeat: no-repeat;
 }
 
@@ -219,7 +225,7 @@ body {
 }
 
 .about-btn {
-   background-image: url("/img/info-circle-solid.svg");
+   background-image: url("/assets/info-circle-solid.svg");
    position: absolute;
    top: 0;
    right: 0;
@@ -247,8 +253,12 @@ body {
    background: var(--color-accent);
    padding: 20px;
    color: white;
-   box-shadow: 0 0 30px #000;
+   box-shadow: 0 10px 30px rgb(0, 12, 22);
    z-index: 5;
+}
+
+.about-dialog a {
+   color: var(--color-secondary);
 }
 
 .about-dialog .close-btn {
@@ -256,9 +266,8 @@ body {
    top: 0;
    right: 0;
    line-height: 0;
-   padding: 9px 5px 15px 5px;
-   margin: 5px;
-   font-size: 2em;
+   padding: 15px;
+   font-size: 1.5em;
 }
 
 .about-dialog .close-btn:hover {
