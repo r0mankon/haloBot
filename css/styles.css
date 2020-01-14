@@ -284,8 +284,12 @@ body {
 }
 
 .about-dialog .version,
-.repo {
+.github {
    display: block;
+}
+
+.github {
+   padding-top: 5px;
 }
 
 .about-dialog .copyright {
