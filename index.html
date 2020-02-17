@@ -4,26 +4,23 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <title>haloBot</title>
    <link rel="stylesheet" href="./css/styles.min.css" />
-   <link rel="manifest" href="./manifest.json">
-   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
-   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
-   <link rel="icon" type="image/png" sizes="192x192" href="./assets/android-chrome-192x192.png">
-   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
-   <link rel="shortcut icon" href="./assets/favicon.ico">
-   <meta name="msapplication-TileColor" content="#002e4e">
-   <meta name="msapplication-config" content="./assets/browserconfig.xml">
-   <meta name="theme-color" content="#002e4e">
+   <link rel="manifest" href="./manifest.json" />
+   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
+   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+   <link rel="icon" type="image/png" sizes="192x192" href="./assets/android-chrome-192x192.png" />
+   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
+   <link rel="shortcut icon" href="./assets/favicon.ico" />
+   <meta name="msapplication-TileColor" content="#002e4e" />
+   <meta name="msapplication-config" content="./assets/browserconfig.xml" />
+   <meta name="theme-color" content="#002e4e" />
    <meta name="description"
-      content="A Simple Internet Bot written in Javascript. Logo Inspired From Microsoft Cortana. API Uses From WikiMedia, DuckDuckGo, OpenWeatherMap, ChuckNorrisJokes etc">
+      content="A Simple Internet Bot written in Javascript. Logo Inspired From Microsoft Cortana. API Uses From WikiMedia, DuckDuckGo, OpenWeatherMap, ChuckNorrisJokes etc" />
 </head>
 
 <body>
-   <noscript>You need to enable JavaScript to run this app.</noscript>
-
    <main class="grid-container">
-
       <section class="container container-top">
-         <span class="icon about-btn"></span>
+         <span class="icon about-btn" id="about-btn"></span>
 
          <div class="halo">
             <span class="halo-outer">
@@ -35,12 +32,12 @@
       </section>
 
       <section class="container container-middle">
-         <!-- bot output element -->
+         <!-- This is where bot screams -->
          <p id="output-element"></p>
       </section>
 
       <section class="container container-bottom">
-         <div class="container-sc-btn"></div>
+         <div class="container-sc-btn" id="container-sc-btn"></div>
 
          <div class="container-input">
             <span class="icon" id="mic"></span>
@@ -50,12 +47,12 @@
       </section>
    </main>
 
-   <section class="about-dialog">
-      <span class="close-btn">&times;</span>
+   <section class="about-dialog" id="about-dialog">
+      <span class="close-btn" id="close-btn">&times;</span>
       <span class="app-name">haloBot</span>
       <span class="version">Version: 1.0.4</span>
       <span class="github">
-         Submit issues on
+         Submit issues or ideas on
          <a href="https://github.com/rokonxr/bot/issues" rel="noopener" target="blank">Github</a>
       </span>
       <span class="copyright">Made with &hearts; by
@@ -63,6 +60,7 @@
       </span>
    </section>
 
+   <noscript>You need to enable JavaScript to run this app.</noscript>
    <script src="./dist/bundle.js"></script>
    <script>
       if (navigator.serviceWorker.controller) {
@@ -72,12 +70,11 @@
       } else {
          navigator.serviceWorker
             .register("service-worker.js", {
-               scope: "./"
+               scope: "./",
             })
             .then(function (reg) {
                console.log(
-                  "Service worker has been registered for scope: " +
-                  reg.scope
+                  "Service worker has been registered for scope: " + reg.scope
                );
             });
       }
