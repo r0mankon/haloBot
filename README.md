@@ -1,14 +1,12 @@
 # haloBot
 
-haloBot is simple internet bot written in javascript that can do nothing!
+A simple internet bot written in javascript that can do nothing!
 
 ### [**Live App Demo**](https://rokonxr.github.io/bot)
 
 ## Known Issues/Bug
 
--  Text-to-speak works sometimes but not always
--  Voice recognition don't work as it should be
--  No Animation between fetching & showing data
+-  Voice recognition don't work
 -  Layout can break on tiny screens
 
 ## To-do
