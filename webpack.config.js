@@ -1,26 +1,23 @@
 const path = require("path");
 
 module.exports = {
-   entry: "./src/index.js",
+  entry: "./src/index.js",
+  output: {
+    filename: "bundle.js",
+  },
+  module: {
+    rules: [
+      {
+        test: /.(js|jsx)$/,
+        include: [path.resolve(__dirname, "src")],
+        loader: "babel-loader",
 
-   output: {
-      filename: "bundle.js",
-      path: path.resolve(__dirname, "dist")
-   },
+        options: {
+          plugins: ["@babel/syntax-dynamic-import"],
 
-   module: {
-      rules: [
-         {
-            test: /.(js|jsx)$/,
-            include: [path.resolve(__dirname, "src")],
-            loader: "babel-loader",
-
-            options: {
-               plugins: ["@babel/syntax-dynamic-import"],
-
-               presets: ["@babel/preset-env"]
-            }
-         }
-      ]
-   }
+          presets: ["@babel/preset-env"],
+        },
+      },
+    ],
+  },
 };
