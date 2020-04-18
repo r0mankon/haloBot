@@ -1,34 +1,33 @@
 {
-   "name": "halobot",
-   "version": "1.0.4",
-   "description": "Internet Bot",
-   "main": "index.js",
-   "scripts": {
-      "dev": "webpack --mode development",
-      "build": "webpack --mode production",
-      "start": "webpack-dev-server"
-   },
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/rokonxr/bot.git"
-   },
-   "keywords": [],
-   "author": "@rokonxr",
-   "license": "MIT",
-   "bugs": {
-      "url": "https://github.com/rokonxr/bot/issues"
-   },
-   "homepage": "https://github.com/rokonxr/bot",
-   "devDependencies": {
-      "@babel/core": "^7.8.0",
-      "@babel/plugin-transform-runtime": "^7.8.0",
-      "@babel/preset-env": "^7.8.2",
-      "@webpack-cli/init": "^0.2.2",
-      "babel-loader": "^8.0.6",
-      "webpack": "^4.41.5",
-      "webpack-cli": "^3.3.10"
-   },
-   "dependencies": {
-      "@babel/runtime": "^7.8.0"
-   }
+  "name": "halobot",
+  "version": "1.0.9",
+  "description": "Internet Bot",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rokonxr/bot.git"
+  },
+  "keywords": [],
+  "author": "@rokonxr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rokonxr/bot/issues"
+  },
+  "homepage": "https://github.com/rokonxr/bot",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.2"
+  }
 }

@@ -7,6 +7,14 @@ export function $(id) {
 }
 
 /**
+ * querySelectorAll wrapper
+ * @param {String} selector CSS selector
+ */
+export function $qsa(selector) {
+  return document.querySelectorAll(selector);
+}
+
+/**
  * Change elements visibility to visible
  * @param {HTMLElement} element DOM Element that will be visible
  */
@@ -49,9 +57,9 @@ export async function getFetch(url) {
     return data;
   } catch (error) {
     if (error.message === "Failed to fetch") {
-      return "No Internet";
+      $("bot-speak").innerText = "No Internet";
     } else {
-      return error.message;
+      alert(error.message);
     }
   }
 }

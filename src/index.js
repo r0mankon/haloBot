@@ -1,29 +1,27 @@
-import {
-  $about_button,
-  $about_dialog,
-  $input,
-  $output_element,
-  $close_button,
-  $mic,
-  $submit,
-} from "./elements";
-import { reveal, hide, createElement } from "./helper";
-import Data from "./Data";
+import { $, $qsa, reveal, hide, createElement } from "./helper";
+import DateTime from "./api/DateTime";
+import getWeather from "./api/getWeather";
+import getJokes from "./api/getJokes";
+import flipCoin from "./api/flipCoin";
+import duckDuckGo from "./api/ddg";
 
-const data = new Data($output_element);
+const dateTime = new DateTime();
+const $botSpeak = $("bot-speak");
+const $input = $("input");
+const $submit = $("submit");
 
-// addEventLister wrapper
-HTMLElement.prototype.on = function(event, callback) {
-  return this.addEventListener(event, callback);
-};
-
-const dom = {
+const botSpeak = {
   setHtml(value) {
-    $output_element.innerHTML = value;
+    $botSpeak.innerHTML = value;
   },
   setText(value) {
-    $output_element.innerText = value;
+    $botSpeak.innerText = value;
   },
+};
+
+// addEventLister wrapper for html element
+HTMLElement.prototype.on = function (event, callback) {
+  return this.addEventListener(event, callback);
 };
 
 function greet() {
@@ -36,7 +34,7 @@ function greet() {
   return greetings[Math.floor(Math.random() * greetings.length)];
 }
 
-function textToSpeech(text = $output_element.textContent) {
+function textToSpeech(text = $botSpeak.textContent) {
   if ("speechSynthesis" in window) {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance();
@@ -46,22 +44,21 @@ function textToSpeech(text = $output_element.textContent) {
     if (text.includes("Loading...")) {
       synth.cancel();
     } else {
-      synth.speak(utterance); // then speak the current utterance
+      synth.speak(utterance); // then make the current utterance
     }
   } else {
-    alert("SpeechSynthesis is not supported by your browser");
+    alert("SpeechSynthesis is not supported by your device/browser");
   }
 }
 
-// BUG: speechrecognition functionality not working most probably sync/async mater
+// BUG: speech recognition functionality not working most probably sync/async mater
 // TODO: fix this bug
 async function speechToText() {
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   const recognition = new SpeechRecognition();
   await recognition.start();
-  recognition.onstart = () => dom.setText("Listening...");
+  recognition.onstart = () => botSpeak.setText("Listening...");
   recognition.onresult = async event => {
     const current = await event.resultIndex;
     const transcript = await event.results[current][0].transcript;
@@ -72,52 +69,76 @@ async function speechToText() {
   };
 }
 
-function bot(input, data) {
+function bot(input) {
   const inputValue = input.value.toLowerCase();
 
-  // using arrow function instead of normal function for whatever reason
   const includes = key => {
     return inputValue.includes(key);
   };
 
   // PRO logic started!!!
-  if (includes("hi")) {
-    dom.setText("Hi, What can I do for you");
-  } else if (includes("you")) {
-    dom.setText("I am doing great. Thanks for asking");
-  } else if (includes("bored")) {
-    ("What can I do for you?");
-  } else if (includes("thanks")) {
-    dom.setText("Your are Welcome");
-  } else if (includes("bye")) {
-    dom.setText("Goode Bye");
-  } else if (includes("time")) {
-    dom.setText(data.getTime());
-  } else if (includes("date")) {
-    dom.setText(data.getDate());
-  } else if (includes("month")) {
-    dom.setText(data.getMonthName());
-  } else if (includes("weather")) {
-    dom.setText("Loading...");
-    data.getWeather();
-  } else if (includes("joke")) {
-    dom.setText("Loading...");
-    data.getJokes().then(joke => dom.setText(joke));
-  } else {
-    dom.setText("Loading...");
-    data.duckDuckGo(inputValue).then(response => dom.setHtml(response));
-  }
 
-  textToSpeech();
+  if (includes("hi") || includes("hello") || includes("howdy") || includes("hey")) {
+    botSpeak.setText(greet());
+    textToSpeech();
+  } else if (includes("you")) {
+    botSpeak.setText("I am doing great. Thanks for asking");
+    textToSpeech();
+  } else if (includes("bored")) {
+    botSpeak.setText("What can I do for you?");
+    textToSpeech();
+  } else if (includes("thanks")) {
+    botSpeak.setText("Your are Welcome");
+    textToSpeech();
+  } else if (includes("bye")) {
+    botSpeak.setText("Goode Bye");
+    textToSpeech();
+  } else if (includes("time")) {
+    botSpeak.setText(dateTime.getTime());
+    textToSpeech();
+  } else if (includes("date")) {
+    botSpeak.setText(dateTime.getDate());
+    textToSpeech();
+  } else if (includes("month")) {
+    botSpeak.setText(dateTime.getMonthName());
+    textToSpeech();
+  } else if (includes("coin")) {
+    botSpeak.setHtml(flipCoin());
+  } else if (includes("weather")) {
+    botSpeak.setText("Loading...");
+    getWeather(botSpeak);
+    textToSpeech();
+  } else if (includes("joke")) {
+    botSpeak.setText("Loading...");
+    getJokes().then(joke => {
+      botSpeak.setText(joke);
+      textToSpeech();
+    });
+  } else {
+    botSpeak.setText("Loading...");
+    duckDuckGo(inputValue).then(response => {
+      botSpeak.setHtml(response);
+      textToSpeech();
+    });
+  }
 }
 
-function main(input, data) {
-  dom.setText(greet());
+function main(input) {
+  botSpeak.setText(greet());
+  textToSpeech();
 
-  $about_button.on("click", () => reveal($about_dialog));
-  $close_button.on("click", () => hide($about_dialog));
+  const dialogContainer = $("container-dialog");
 
-  // Press Enter key to perform submit
+  $("about-btn").on("click", () => reveal(dialogContainer));
+  $("close-btn").on("click", () => hide(dialogContainer));
+
+  window.addEventListener("click", event => {
+    if (event.target === dialogContainer) {
+      hide(dialogContainer);
+    }
+  });
+
+  // Enter key to perform submit
   input.on("keypress", event => {
     if (event.defaultPrevented) {
       return;
@@ -127,56 +148,53 @@ function main(input, data) {
 
     if (key === "Enter" || key === 13) {
       $submit.click();
-      // clear tex field
       input.value = null;
     }
   });
 
-  // Clear text field on focus
+  // Clear input on focus
   input.on("focus", () => (input.value = null));
 
-  $mic.on("click", async () => {
+  $("mic").on("click", async () => {
     input.value = await speechToText();
-    bot(input, data);
+    bot(input);
   });
 
   $submit.on("click", () => {
     if (input.value !== "") {
-      bot(input, data);
+      bot(input);
     }
   });
 
-  // Create some command buttons
+  // Some command buttons
 
   const buttonTexts = [
-    "Time",
-    "Date",
     "Weather",
+    "Flip coin",
     "Tell me a joke",
     "What is bot",
     "Ecosia",
     "Computer Science",
+    "Time",
+    "Date",
+    "Month name",
   ];
 
   buttonTexts.forEach(text => {
-    const $shortcut_btn = createElement("span", { class: "shortcut-btn" });
-    $shortcut_btn.innerHTML = text;
-    document.getElementById("container-sc-btn").appendChild($shortcut_btn);
+    const $commandBtn = createElement("span", { class: "command-btn" });
+    $commandBtn.innerHTML = text;
+    $("container-cmd-btn").appendChild($commandBtn);
   });
 
-  const $all_shortcut_btn = document.querySelectorAll(".shortcut-btn");
-  let btn_inner_text;
-
   // adding click listener to all buttons
-  $all_shortcut_btn.forEach(button => {
+  $qsa(".command-btn").forEach(button => {
     button.on("click", event => {
-      btn_inner_text = event.target.innerText;
-      input.value = btn_inner_text;
+      const btn_text = event.target.innerText;
+      input.value = btn_text;
       $submit.click();
     });
   });
-
-  textToSpeech();
 }
 
-main($input, data);
+// Executing main function
+main($input);
