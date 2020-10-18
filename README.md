@@ -1,8 +1,8 @@
-# haloBot
+# haloBot - A bot with a halo
 
 A simple internet bot written in vanilla javascript that can do nothing!
 
-### [**Running App**](https://rokonxr.github.io/bot)
+### [**Deployed on Github Pages**](https://rokonxr.github.io/bot)
 
 ## Screenshots
 
@@ -12,13 +12,12 @@ A simple internet bot written in vanilla javascript that can do nothing!
 
 ## Known Issues/Bug
 
-- Voice recognition don't work
 - Layout can break on tiny devices
 
 ## To-do
 
 - Bug fix
-- Change logo to latest halo
+- Change logo to match the latest halo
 
 ## Contributing
 

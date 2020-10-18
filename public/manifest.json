@@ -4,6 +4,11 @@
   "author": "@rokonxr",
   "icons": [
     {
+      "src": "./assets/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
       "src": "./assets/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"

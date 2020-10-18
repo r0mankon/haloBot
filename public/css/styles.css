@@ -1,42 +1,83 @@
 * {
-  padding: 0;
-  margin: 0 auto;
   box-sizing: border-box;
 }
 
 :root {
   --color-primary: #000;
-  --color-secondary: #002e4e;
+  --color-secondary: #113;
   --color-accent: #1da1f2;
-  --color-accent-2: #49498c;
+  --color-secondary-accent: #49498c;
   --halo-center: var(--color-primary);
 }
 
 a:any-link {
   color: var(--color-secondary);
 }
+html,
+body {
+  margin: 0 auto;
+}
 
 body {
   height: 100vh;
   width: 100%;
-  max-width: 600px;
+  max-width: 430px;
   background-color: var(--color-primary);
   font-family: monospace;
-  font-size: 1.1em;
+  font-size: 1em;
   color: white;
-}
-
-.grid-container {
-  width: inherit;
-  height: inherit;
-  display: grid;
-  grid-template-rows: 20vh 60vh 20vh;
 }
 
 .container {
   width: inherit;
-  padding: 10px;
   text-align: center;
+}
+
+.flex-container {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.container-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.container-center {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--color-accent);
+  background-image: linear-gradient(var(--color-secondary), black);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  margin-bottom: -30px;
+  padding: 10px;
+  opacity: 0;
+  animation-name: delay;
+  animation-delay: 0.5s;
+  animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+}
+
+.container-bottom {
+  opacity: 0;
+  animation-name: delay;
+  animation-delay: 0.3s;
+  animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: var(--color-secondary);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  box-shadow: 0 -1px 16px 1px #000000c2;
+  overflow: hidden;
 }
 
 .halo {
@@ -45,6 +86,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   display: inline-block;
+  z-index: 101;
 }
 
 .halo-outer {
@@ -58,7 +100,7 @@ body {
 }
 
 .halo-inner {
-  background: var(--color-accent-2);
+  background: var(--color-secondary-accent);
   height: 47px;
   width: 47px;
   border-radius: 50%;
@@ -66,7 +108,7 @@ body {
   align-items: center;
   justify-content: center;
   animation-name: inner-halo-animation;
-  animation-duration: 9s;
+  animation-duration: 1.5s;
   animation-delay: 2s;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
@@ -79,10 +121,10 @@ body {
   width: 38px;
   border-radius: 50%;
   animation-name: center-halo-animation;
-  animation-duration: 9s;
+  animation-duration: 3s;
   animation-delay: 2s;
   animation-iteration-count: infinite;
-  animation-fill-mode: backwards;
+  animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -91,7 +133,7 @@ body {
     transform: scale(0.6);
   }
   100% {
-    transform: scale((1));
+    transform: scale(1);
   }
 }
 
@@ -100,76 +142,60 @@ body {
     transform: scale(0.3);
   }
   100% {
-    transform: scale((1));
+    transform: scale(1);
   }
 }
 
-.container-top {
+#output-container {
+  font-size: 1.3em;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.container-center {
-  overflow-y: auto;
-  opacity: 0;
-  animation-name: delay;
-  animation-delay: 1s;
+#output-container a {
+  font-weight: bold;
+  display: block;
+  margin-right: auto;
+}
+
+.output {
+  animation-name: slideUp;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
-  background-color: var(--color-accent);
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-  margin-bottom: -30px;
 }
 
-#bot-speak {
-  font-size: 1.3em;
-  color: black;
-  padding: 25px 0;
-}
-
-#bot-speak a {
-  margin-right: 10px;
-  font-weight: bold;
+@keyframes slideUp {
+  0% {
+    transform: translateY(1000px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .related-topic {
   display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin: 10px;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   text-align: left;
-}
-
-.container-bottom {
+  background-color: #46b8ff;
+  padding: 7px;
+  border-radius: 15px;
+  color: black;
+  box-shadow: 0 1px 1px #434343;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  opacity: 0;
-  animation-name: delay;
-  animation-delay: 0.5s;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-  background-color: var(--color-secondary);
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-  overflow: hidden;
-}
-
-@keyframes delay {
-  to {
-    opacity: 1;
-  }
+  justify-content: space-around;
+  font-size: 0.9em;
 }
 
 #container-cmd-btn {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-  padding-bottom: 10px;
-  width: 100%;
+  padding: 7px 0;
+  width: inherit;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -178,11 +204,12 @@ body {
   display: inline-block;
   font-size: 0.9em;
   font-weight: bold;
+  font: uppercase;
   margin: 5px;
-  padding: 13px 15px;
-  background: var(--color-accent-2);
+  padding: 15px;
+  background: var(--color-secondary-accent);
   color: white;
-  border-radius: 20px 3px;
+  border-radius: 16px 3px;
   box-shadow: 0 1px 3px rgb(20, 20, 20);
   cursor: pointer;
 }
@@ -195,35 +222,36 @@ body {
 
 .container-input {
   width: inherit;
-  height: 42px;
+  height: 40px;
   display: flex;
   align-items: center;
+  padding: 30px 8px;
 }
 
 #input {
   width: inherit;
   height: inherit;
   padding: 0 15px;
-  background: var(--color-primary);
   font-family: inherit;
-  font-size: 0.9em;
-  color: rgb(200, 200, 200);
+  font-size: 1.2em;
+  color: rgb(238, 238, 238);
   outline: none;
   border: 1px solid var(--color-accent);
-  border-radius: 20px;
-  margin: 0 7px;
+  border-radius: 25px;
+  margin-right: -35px;
+  box-shadow: 0 1px 3px black;
+  background: radial-gradient(black, transparent);
 }
 
 #input:focus {
-  background: white;
-  transition: 0.5s;
-  color: black;
+  background: rgb(0, 0, 0);
+  color: white;
 }
 
 .icon {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background-size: cover;
   background-position: center;
   cursor: pointer;
@@ -235,11 +263,15 @@ body {
 }
 
 #mic {
-  background-image: url("../assets/icons/mic.svg");
+  background-image: url("../assets/icons/mic.png");
+  height: 50px;
+  width: 50px;
 }
 
 #submit {
-  background-image: url("../assets/icons/submit.svg");
+  background-image: url("../assets/icons/slide-up.png");
+  padding-right: 8px;
+  visibility: hidden;
 }
 
 .about-btn {
@@ -266,54 +298,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.527);
+  background-color: var(--color-primary);
 }
 
 .about-dialog {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
   color: #c3c3c3;
   font-size: 0.9em;
-  max-width: 350px;
-  min-width: 240px;
+  text-align: center;
   height: fit-content;
-  background: var(--color-accent-2);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgb(0, 12, 22);
-  z-index: 5;
-}
-
-.about-dialog a {
-  color: #e2f4ff;
-}
-
-.about-dialog .close-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 10px;
-  font-size: 1.5em;
-  color: black;
-  width: 33px;
-  height: 33px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: var(--color-accent);
 }
 
-.about-dialog .close-btn:hover {
-  color: white;
-  background: red;
-  cursor: default;
+.about-dialog a,
+.app-name {
+  color: var(--color-accent);
 }
 
 .about-dialog .app-name {
+  font-family: "monaco", monospace;
   font-size: 2.5em;
-  color: #e2f4ff;
-  padding: 0 0 15px;
 }
 
 .about-dialog .app-name,
@@ -324,15 +331,37 @@ body {
 }
 
 .about-dialog .version {
-  padding: 5px 0;
+  padding: 5px;
 }
 
 .about-dialog .github {
-  padding-top: 5px;
+  padding: 15px;
 }
 
 .about-dialog .copyright {
-  padding-top: 20px;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+}
+
+.about-dialog .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.1em;
+  color: #000;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.about-dialog .close-btn:hover {
+  color: white;
+  background-color: rgb(255, 60, 60);
 }
 
 .coin {
@@ -353,6 +382,7 @@ body {
 
 .coin-text {
   color: #3e1010;
+  font-family: fantasy, cursive monospace;
   font-weight: bold;
   text-shadow: 1px 1px 1px black;
   opacity: 0;

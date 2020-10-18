@@ -1,52 +1,85 @@
-import { getFetch } from "../helper";
+import { getFetch, handleError } from "../lib/utils";
+import { openWeatherMap as owm } from "./config.json";
 
-function showPositionError(error) {
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      alert("Turn your location service on");
-      break;
-    case error.POSITION_UNAVAILABLE:
-      alert("Location information is unavailable.");
-      break;
-    case error.TIMEOUT:
-      alert("The request to get location timed out.");
-      break;
-    case error.UNKNOWN_ERROR:
-      alert("An unknown error occurred.");
-      break;
+export async function getWeather() {
+  const { lat, lon } = await getPosition();
+
+  let results;
+
+  const data = await getFetch(
+    `${owm.base_url}?units=imperial&lat=${lat}&lon=${lon}&APPID=${owm.api_key}`
+  );
+
+  console.log(data);
+
+  if (data.cod === "404") {
+    return (results = "Weather not found");
   }
+
+  if (data.lat == "") {
+    return (results = "Unable to find your Location");
+  }
+
+  results = template(data);
+
+  // console.log(results)
+  return results;
 }
 
-export default async function getWeather(botSpeak) {
-  const geo_options = {
-    enableHighAccuracy: true,
-    maximumAge: 30000,
-  };
+function template(data) {
+  return `
+    <h2 style='margin-bottom: 0; font-weight: normal'>Location: ${data.name}</h2>
+    <h1 style='font-size: 36px'>
+       ${Math.floor((data.main.temp - 32) / 1.8)}<sup>°C</sup>
+    </h1>
+    <p>Feels Like: ${data.weather[0].main}</p>
+    <p>Wind: ${Math.floor(data.wind.speed)} km/h</p>
+    <p>Humidity: ${data.main.humidity}%</p>
+  `;
+}
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(weather, showPositionError, geo_options);
-  } else {
-    botSpeak.setText("Geolocation is not supported by your device/browser");
-  }
+function getPosition() {
+  return new Promise((resolve, reject) => {
+    let results;
 
-  async function weather(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+    const geo_options = {
+      enableHighAccuracy: true,
+      maximumAge: 30000,
+    };
 
-    const data = await getFetch(
-      `https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=${lat}&lon=${lon}&APPID=58b6f7c78582bffab3936dac99c31b25`
-    );
-
-    if (data.cod === "404") {
-      botSpeak.setText("Weather not found");
-    } else if (data.lat == "") {
-      botSpeak.setText("Unable to find your Location");
-    } else {
-      botSpeak.setText(
-        `The weather condition in ${data.name} is mostly ${
-          data.weather[0].description
-        } at a temperature of ${Math.round((data.main.temp - 32) / 1.8)} Degree Celsius`
-      );
+    if (!navigator.geolocation) {
+      return (results = "Geolocation is not supported by your device/browser");
     }
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        results = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        };
+        resolve(results);
+      },
+      handle_position_error,
+      geo_options
+    );
+  });
+}
+
+function handle_position_error(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      return handleError("Turn your location service on");
+
+    case error.POSITION_UNAVAILABLE:
+      return handleError("Location information is unavailable.");
+
+    case error.TIMEOUT:
+      return handleError("The request to get location timed out.");
+
+    case error.UNKNOWN_ERROR:
+      return handleError("An unknown error occurred.");
+
+    default:
+      return handleError("Error Not Known! 👽");
   }
 }

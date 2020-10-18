@@ -1,6 +1,12 @@
-import { getFetch } from "../helper";
+import { getFetch } from "../lib/utils";
+import { chuckNorris } from "./config.json";
 
-export default async function getJokes() {
-  const data = await getFetch("https://api.chucknorris.io/jokes/random");
-  return await data.value;
+export async function getJokes() {
+  try {
+    const { value } = await getFetch(chuckNorris.base_url);
+
+    return value;
+  } catch (error) {
+    return error;
+  }
 }
