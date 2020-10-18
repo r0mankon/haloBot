@@ -16,6 +16,7 @@ export const App = ({ input, output, $submit, $mic }: App) => {
 
   async function handleSubmit() {
     if (!input.isEmpty()) {
+      output.write = '...'
       const res = await bot(input.value);
       output.write = res;
 

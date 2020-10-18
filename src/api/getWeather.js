@@ -10,8 +10,6 @@ export async function getWeather() {
     `${owm.base_url}?units=imperial&lat=${lat}&lon=${lon}&APPID=${owm.api_key}`
   );
 
-  console.log(data);
-
   if (data.cod === "404") {
     return (results = "Weather not found");
   }
@@ -22,13 +20,12 @@ export async function getWeather() {
 
   results = template(data);
 
-  // console.log(results)
   return results;
 }
 
 function template(data) {
   return `
-    <h2 style='margin-bottom: 0; font-weight: normal'>Location: ${data.name}</h2>
+    <h2 style='margin-bottom: 0; font-weight: normal'>${data.name}</h2>
     <h1 style='font-size: 36px'>
        ${Math.floor((data.main.temp - 32) / 1.8)}<sup>°C</sup>
     </h1>
