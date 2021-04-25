@@ -9,14 +9,14 @@
     "watch": "webpack --mode development --watch",
     "start": "webpack-dev-server --hot"
   },
-  "repository": "git+https://github.com/rokonxr/haloBot.git",
+  "repository": "git+https://github.com/r0manr0k0n/haloBot.git",
   "keywords": [],
-  "author": "@rokonxr",
+  "author": "@r0manr0k0n",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rokonxr/haloBot/issues"
+    "url": "https://github.com/r0manr0k0n/haloBot/issues"
   },
-  "homepage": "https://github.com/rokonxr/haloBot",
+  "homepage": "https://github.com/r0manr0k0n/haloBot",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",

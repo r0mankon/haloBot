@@ -2,7 +2,7 @@
 
 A simple internet bot written in vanilla javascript that can do nothing!
 
-### [**Deployed on Github Pages**](https://rokonxr.github.io/haloBot)
+### [**Deployed on Github Pages**](https://r0manr0k0n.github.io/haloBot)
 
 ## Screenshots
 
@@ -21,7 +21,7 @@ A simple internet bot written in vanilla javascript that can do nothing!
 
 ## Contributing
 
-Any kind of contributions are always welcome.
+Any kind of contributions are welcome.
 
 ## License
 
