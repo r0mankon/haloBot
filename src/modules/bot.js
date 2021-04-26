@@ -34,7 +34,7 @@ const response_map = [
   {
     keyword: "jokes, tell me a joke",
     get response() {
-      return getJokes().then(r => r);
+      return getJokes();
     },
   },
   {

@@ -5,7 +5,7 @@
   },
   "duckDuckGo": {
     "base_url": "https://api.duckduckgo.com",
-    "proxy": "https://cors-anywhere.herokuapp.com/"
+    "proxy": "https://fix-cors.vercel.app/"
   },
   "chuckNorris": {
     "base_url": "https://api.chucknorris.io/jokes/random"
