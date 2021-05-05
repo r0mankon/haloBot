@@ -1,7 +1,8 @@
-export function speechToText() {
+export function speechToText(): Promise<string> {
   return new Promise(async (resolve, reject) => {
     try {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
         return reject("Your browser doesn't support Speech Recognition!");

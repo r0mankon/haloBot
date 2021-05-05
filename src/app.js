@@ -1,7 +1,7 @@
 import { $, createElement, handleError, hide, show } from "./lib/utils";
 import { bot, greet, speechToText, textToSpeech } from "./modules";
-import { Input } from "./lib/input";
-import { Output } from "./lib/output";
+import { Input } from "./lib/Input";
+import { Output } from "./lib/Output";
 
 interface App {
   input: Input;
@@ -16,7 +16,7 @@ export const App = ({ input, output, $submit, $mic }: App) => {
 
   async function handleSubmit() {
     if (!input.isEmpty()) {
-      output.write = '...'
+      output.write = "...";
       const res = await bot(input.value);
       output.write = res;
 
@@ -26,20 +26,18 @@ export const App = ({ input, output, $submit, $mic }: App) => {
 
   async function handleMic() {
     input.reset();
-    const interval = setInterval(() => {
-      input.value += "🝊";
-    }, 700);
 
+    input.value = "...";
     output.write = "Listening...";
 
     const transcript = await speechToText().catch(handleError);
 
-    clearInterval(interval);
-
-    if (!transcript) return (output.write = "Can't listen!");
+    if (!transcript) {
+      output.write = "Can't listen!";
+      return;
+    }
 
     input.value = transcript;
-
     $submit.click();
   }
 
@@ -54,18 +52,15 @@ export const App = ({ input, output, $submit, $mic }: App) => {
     }
   }
 
-  const toggleVisibility = element => (input.isEmpty() ? hide(element) : show(element));
+  const toggleVisibility = element =>
+    input.isEmpty() ? hide(element) : show(element);
 
   // mic, enter_key and cmd buttons clicks this submit button too!
 
   $submit.on("click", handleSubmit);
-
   $mic.on("click", handleMic);
-
   input.element.on("keypress", handleEnterKey);
-
   input.element.on("keyup", () => toggleVisibility($submit));
-
   input.element.on("focus", () => {
     input.reset();
     toggleVisibility($submit);

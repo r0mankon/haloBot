@@ -1,8 +1,8 @@
 import { $, hide, show } from "./lib/utils";
 import { App } from "./app";
 import strings from "./strings";
-import { Input } from "./lib/input";
-import { Output } from "./lib/output";
+import { Input } from "./lib/Input";
+import { Output } from "./lib/Output";
 
 HTMLElement.prototype.on = function (event, eventListener) {
   return this.addEventListener(event, eventListener);
@@ -11,7 +11,7 @@ Window.prototype.on = function (event, eventListener) {
   return this.addEventListener(event, eventListener);
 };
 
-const $input = $("input");
+const $input: HTMLInputElement = $("input");
 const $output = $("output-container");
 const $mic = $("mic");
 const $submit = $("submit");

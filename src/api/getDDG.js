@@ -3,8 +3,7 @@ import { duckDuckGo as ddg } from "./config.json";
 
 export async function getDDG(query) {
   try {
-    /** @type {String} */
-    let results;
+    let results: string;
 
     const response = await getFetch(
       ddg.proxy + `${ddg.base_url}/?no_redirect=1&q=${query}&format=json&t=haloBot`

@@ -53,6 +53,7 @@ const response_map = [
 
 function getResponse(input) {
   let res;
+
   for (const obj of response_map) {
     const match = obj.keyword.includes(input.trim());
 
@@ -62,6 +63,7 @@ function getResponse(input) {
     }
     res = false;
   }
+
   return res;
 }
 
