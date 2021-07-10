@@ -9,5 +9,8 @@
   },
   "chuckNorris": {
     "base_url": "https://api.chucknorris.io/jokes/random"
+  },
+  "ipee": {
+    "base_url": "https://ipee.vercel.app"
   }
 }

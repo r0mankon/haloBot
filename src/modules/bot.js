@@ -1,4 +1,13 @@
-import { DateTime, flipCoin, getDDG, getJokes, getWeather, greet, textToSpeech } from ".";
+import {
+  DateTime,
+  flipCoin,
+  getDDG,
+  getJokes,
+  getWeather,
+  greet,
+  textToSpeech,
+} from ".";
+import { getIP } from "../api/getIP";
 
 const response_map = [
   {
@@ -41,6 +50,12 @@ const response_map = [
     keyword: "weather, temp, wind",
     get response() {
       return getWeather();
+    },
+  },
+  {
+    keyword: "what is my ip address",
+    get response() {
+      return getIP();
     },
   },
   {
