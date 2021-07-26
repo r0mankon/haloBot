@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>haloBot</title>
+    <meta
+      name="description"
+      content="A Simple Internet Bot written in Javascript. Design Inspired By Microsoft Cortana. API Uses From WikiMedia, DuckDuckGo & OpenWeatherMap, ChuckNorrisJokes etc"
+    />
+    <meta name="theme-color" content="#000" />
+    <meta name="msapplication-TileColor" content="#000" />
+    <meta name="msapplication-config" content="./assets/browserconfig.xml" />
+    <link rel="shortcut icon" href="./assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/android-chrome-192x192.png" />
+    <link rel="stylesheet" href="./css/styles.min.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <script async src="./main.bundle.js"></script>
+  </head>
+
+  <body>
+    <main class="flex-container">
+      <section class="container container-top">
+        <span class="icon about-btn" id="about-btn"></span>
+
+        <div class="halo">
+          <span class="halo-outer">
+            <span class="halo-inner">
+              <span class="halo-center"></span>
+            </span>
+          </span>
+        </div>
+      </section>
+
+      <section class="container container-center">
+        <!-- This is where the bot screams -->
+        <p id="output-container"></p>
+      </section>
+
+      <section class="container container-bottom">
+        <div id="container-cmd-btn"></div>
+        <div class="container-input">
+          <span class="icon" id="mic"></span>
+          <input type="text" id="input" placeholder="enter text..." autocomplete="off" />
+          <span class="icon" id="submit"></span>
+        </div>
+      </section>
+    </main>
+
+    <section id="container-dialog">
+      <div class="about-dialog" id="about-dialog">
+        <span class="icon close-btn" id="close-btn">&times;</span>
+        <span class="app-name" id="app_name"></span>
+        <span class="version" id="version"></span>
+        <span class="github">
+          Contribute to code, report issues or suggest ideas on
+          <a id="bugs" href="" rel="noopener" target="blank">Github</a>
+        </span>
+        <span class="copyright"
+          >Crafted with &hearts; by
+          <a href="https://r0manr0k0n.github.io" target="blank">Roman Rokon</a>
+        </span>
+      </div>
+    </section>
+
+    <noscript>
+      <h1>You need to enable JavaScript to run this app.</h1>
+    </noscript>
+
+    <script type="module">
+      import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate";
+
+      const el = document.createElement("pwa-update");
+      document.body.appendChild(el);
+    </script>
+  </body>
+</html>
