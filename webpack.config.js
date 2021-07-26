@@ -9,7 +9,7 @@ const config = {
   devtool: production ? "source-map" : "eval-source-map",
   entry: "./src/main.js",
   output: {
-    filename: "[name].bundle-2.0.3.js",
+    filename: "[name].bundle.js",
     path: outDir,
   },
   module: {
